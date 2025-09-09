@@ -1,0 +1,10 @@
+Panel Install
+1 sudo su
+2 bash <(curl -s https://raw.githubusercontent.com/Subhanplays/skyport-panel/main/panel.sh)
+
+* Node install:
+1 sudo su
+2 bash <(curl -s https://raw.githubusercontent.com/Subhanplays/skyport-panel/main/node.sh)
+3 cd skyportd
+4 paste your node configure
+5 pm2 start .    

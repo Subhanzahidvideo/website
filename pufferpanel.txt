@@ -1,0 +1,15 @@
+Puffer Panel Intallation
+
+* install puffer panel 
+bash <(curl -s https://raw.githubusercontent.com/subhanplays/hostingsetups/main/puffer-panel-install)
+
+* Admin user create & start  
+sudo pufferpanel user add  
+
+sudo systemctl enable --now pufferpanel
+ 
+For PlayIt Ip
+
+wget https://github.com/playit-cloud/playit-agent/releases/download/v0.15.26/playit-linux-amd64
+chmod +x playit-linux-amd64
+./playit-linux-amd64

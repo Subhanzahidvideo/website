@@ -1,0 +1,15 @@
+One Click Installer
+bash <(curl -s https://raw.githubusercontent.com/Subhanplays/one-click/main/menu)
+ 
+This is for Pterodactyl Wings
+cd pterodactyl
+
+sudo su
+
+nano /etc/pterodactyl/config.yml
+
+cd wings
+
+docker-compose up -d --force-recreate
+
+Credits goes to jishnutech69

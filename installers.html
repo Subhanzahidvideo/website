@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One-Click Installers | Subhan Plays</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; color: white; overflow: hidden; }
+
+    /* GIF Background with Blur */
+    .gif-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: blur(8px);
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-container img {
+      height: 45px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .logo-container img:hover { transform: scale(1.1); }
+    .logo-container span { font-size: 1.6rem; font-weight: bold; }
+
+    .nav-links a {
+      margin-left: 25px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { background: white; color: black; }
+
+    /* Center content */
+    .content {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      z-index: 5;
+      position: relative;
+    }
+    .content h1 { font-size: 3rem; margin-bottom: 20px; text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+    .content p { font-size: 1.3rem; opacity: 0.9; text-shadow: 0 0 10px rgba(0,0,0,0.7); margin-bottom: 40px; }
+
+    .install-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .install-buttons a {
+      background: rgba(255,255,255,0.1);
+      padding: 15px 30px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      transition: 0.3s;
+      backdrop-filter: blur(5px);
+      cursor: pointer;
+    }
+    .install-buttons a:hover { background: rgba(255,255,255,0.3); color: black; }
+  </style>
+</head>
+<body>
+
+  <!-- Background GIF -->
+  <img class="gif-bg" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW1peGU5bG1nYWNpbXc2eTEwc2FvZnBpeW83eHEyZWxpanFwNXViayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2PWBLDJ2KtB1X6o9vY/giphy.gif" alt="background gif">
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo-container">
+      <a href="index.html"><img src="https://cdn.discordapp.com/attachments/1387554434585858192/1414714418402562048/channels4_profile.jpg?ex=68c092f9&is=68bf4179&hm=da73fa106a829f373994ace48ca72a9d1c37ff67640659177983ea2b0486a90e&" alt="Logo"></a>
+      <span>Subhan Plays</span>
+    </div>
+    <div class="nav-links">
+      <a href="installers.html">Installer</a>
+      <a href="videos.html">Videos</a>
+      <a href="ideas.html">Ideas</a>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <h1>My One-Click Installer Codes</h1>
+    <p>Pterodactyl • PufferPanel • Skyport • Full Hosting Setup</p>
+
+<div class="install-buttons">
+  <a href="pterodactyl-by-subhanplays.txt" download>Pterodactyl Installer</a>
+  <a href="pufferpanel.txt" download>PufferPanel Installer</a>
+  <a href="skyport.txt" download>Skyport Installer</a>
+  <a href="one click installer.txt" download>Full Hosting Setup</a>
+</div>
+
+
+
+  <!-- JS to force .sh download -->
+  <script>
+    function downloadSh(url) {
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = url.split('/').pop(); // keeps original .sh filename
+          a.click();
+          URL.revokeObjectURL(a.href);
+        })
+        .catch(console.error);
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideas | Subhan Plays</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; font-family: 'Segoe UI', sans-serif; color: white; }
+
+    /* Blurred GIF Background */
+    .gif-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      filter: blur(8px);
+      transform: scale(1.05);
+    }
+
+    /* Dark overlay */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 15px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .logo img {
+      height: 45px;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+    .logo img:hover { transform: scale(1.1); }
+    .navbar h2 { font-size: 1.6rem; font-weight: bold; margin-left: 15px; }
+    .nav-links a {
+      margin-left: 25px;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    .nav-links a:hover { background: white; color: black; }
+
+    /* Content */
+    .content {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      z-index: 5;
+    }
+    h1 { font-size: 3rem; margin-bottom: 15px; text-shadow: 0 0 20px rgba(0,0,0,0.8); }
+    p { font-size: 1.2rem; opacity: 0.9; margin-bottom: 25px; }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+    input { width: 60%; }
+    button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #45a049; }
+
+    .idea {
+      background: rgba(255,255,255,0.1);
+      padding: 12px;
+      border-radius: 8px;
+      margin: 8px 0;
+      text-align: left;
+      width: 100%;
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Blurred GIF Background -->
+  <img class="gif-bg" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW1peGU5bG1nYWNpbXc2eTEwc2FvZnBpeW83eHEyZWxpanFwNXViayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/2PWBLDJ2KtB1X6o9vY/giphy.gif" alt="background gif">
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div style="display: flex; align-items: center;">
+      <a href="index.html" class="logo">
+        <img src="https://cdn.discordapp.com/attachments/1387554434585858192/1414714418402562048/channels4_profile.jpg?ex=68c13bb9&is=68bfea39&hm=86be5328de230631d030bda7d0bdd8ca986be361646497777a331a1b01353562&" alt="Logo">
+      </a>
+      <h2>🚀 Subhan Plays</h2>
+    </div>
+    <div class="nav-links">
+      <a href="installers.html">Installers</a>
+      <a href="videos.html">Videos</a>
+      <a href="ideas.html">Ideas</a>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <h1>💡 Share Your Ideas</h1>
+    <p>Add your idea and see it appear instantly below</p>
+
+    <input type="text" id="ideaInput" placeholder="Enter your idea...">
+    <button onclick="addIdea()">Submit</button>
+
+    <div id="ideasList"></div>
+  </div>
+
+  <!-- Firebase Firestore -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, onSnapshot } 
+      from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCXgn4BIU3319hPlCSEHZZQOUH7zrjBp50",
+      authDomain: "chat-app-b048c.firebaseapp.com",
+      projectId: "chat-app-b048c",
+      storageBucket: "chat-app-b048c.firebasestorage.app",
+      messagingSenderId: "752496623859",
+      appId: "1:752496623859:web:d650d5ce5d72bec045b786",
+      measurementId: "G-V4XRNNMPR7"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const ideasList = document.getElementById("ideasList");
+    const input = document.getElementById("ideaInput");
+
+    async function addIdea() {
+      const text = input.value.trim();
+      if (!text) return alert("Enter something!");
+      await addDoc(collection(db, "ideas"), { text });
+      input.value = "";
+    }
+
+    onSnapshot(collection(db, "ideas"), (snapshot) => {
+      ideasList.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const div = document.createElement("div");
+        div.className = "idea";
+        div.textContent = doc.data().text;
+        ideasList.appendChild(div);
+      });
+    });
+
+    window.addIdea = addIdea;
+  </script>
+</body>
+</html>

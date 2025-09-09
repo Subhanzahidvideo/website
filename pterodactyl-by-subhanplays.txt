@@ -1,0 +1,28 @@
+🚀 PTERODACTYL SETUP GUIDE
+
+1️⃣ Install Pterodactyl Panel
+
+
+bash <(curl -s https://raw.githubusercontent.com/Subhanplays/codesendbox-ptero/main/install)
+
+
+2️⃣ Install Pterodactyl Wings
+
+
+bash <(curl -s https://raw.githubusercontent.com/Subhanplays/codesendbox-ptero/main/wings)
+
+cd pterodactyl
+
+sudo su
+
+nano /etc/pterodactyl/config.yml
+
+
+5️⃣ Start Wings
+
+cd wings
+
+docker-compose up -d --force-recreate
+
+
+✅ Your Pterodactyl Panel is ready to use! Enjoy
